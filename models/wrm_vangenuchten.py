@@ -19,14 +19,14 @@ class VanGenuchten(object):
             
         self.s_r = self._sr
 
-        # smoothing for kr
-        self._s0 = 1.0 - smoothing_interval
+        # smoothing for sat
+        self._s0 = 1.0 - smoothing_interval_sat
         if self._s0 < 1.:
             self._spline = spline.Spline(self._s0, self.k_relative(self._s0), self.d_k_relative(self._s0),
                                          1.0, 1.0, 0.)
             
-        # smoothing for sat
-        self._pc0 = smoothing_interval_sat
+        # smoothing for pc
+        self._pc0 = smoothing_interval
         if self._pc0 > 0.:
             self._spline_sat = spline.Spline(0., 1., 0., self._pc0, self.saturation(self._pc0), self.d_saturation(self._pc0))
 
